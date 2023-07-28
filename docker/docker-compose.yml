@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  percona:
+    image: percona:8
+    container_name: percona
+    tmpfs:
+      - /tmp
+    environment:
+      MYSQL_ROOT_PASSWORD: testpassword
+    ports:
+      - 33306:3306
+    volumes:
+      # create volumes for use
+      - ./percona:/var/lib/mysql
+    command:
+      # Workaround for no my.cnf in image
+      - '--user=mysql'
+    cap_add:
+      - SYS_NICE  # CAP_SYS_NICE
+
+  # postgres:
+  #   image: postgres:15
+  #   container_name: postgres
+  #   tmpfs:
+  #     - /tmp
+  #   environment:
+  #     POSTGRES_PASSWORD: testpassword
+  #   ports:
+  #     - 55432:5432
+  #   volumes:
+  #     # create volumes for use
+  #     - ./postgres:/var/lib/postgresql/data

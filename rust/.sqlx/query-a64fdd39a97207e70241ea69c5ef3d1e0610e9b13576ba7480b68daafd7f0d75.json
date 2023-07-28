@@ -1,0 +1,47 @@
+{
+  "db_name": "MySQL",
+  "query": "\n        select \n        barcode_id      `id: u64`, \n        barcode         `code: String`,\n        status          `status: BarcodeType`\n        from barcodes where barcode = ?",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id: u64",
+        "type_info": {
+          "type": "Long",
+          "flags": "NOT_NULL | PRIMARY_KEY | UNSIGNED | AUTO_INCREMENT",
+          "char_set": 63,
+          "max_size": 10
+        }
+      },
+      {
+        "ordinal": 1,
+        "name": "code: String",
+        "type_info": {
+          "type": "VarString",
+          "flags": "NOT_NULL | UNIQUE_KEY | NO_DEFAULT_VALUE",
+          "char_set": 224,
+          "max_size": 1020
+        }
+      },
+      {
+        "ordinal": 2,
+        "name": "status: BarcodeType",
+        "type_info": {
+          "type": "String",
+          "flags": "NOT_NULL | ENUM",
+          "char_set": 224,
+          "max_size": 40
+        }
+      }
+    ],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": [
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "a64fdd39a97207e70241ea69c5ef3d1e0610e9b13576ba7480b68daafd7f0d75"
+}
