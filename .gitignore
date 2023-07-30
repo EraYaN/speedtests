@@ -250,3 +250,6 @@ docker/postgres
 k6/shared/barcodes.json
 php/vendor
 k6/data
+php/internal.Dockerfile
+build-images.ps1
+k6/.speedtest_options.json

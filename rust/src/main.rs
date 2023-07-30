@@ -23,7 +23,7 @@ async fn main() {
     // build our application with a route
     let app = Router::new()
         .route("/", get(root))
-        .route("/barcode/lookup", get(barcode_scan))
+        .route("/barcode/lookup", get(barcode_lookup))
         .layer(Extension(pool));
 
     // run our app with hyper
@@ -40,7 +40,7 @@ async fn root() -> (StatusCode, &'static str) {
     return (StatusCode::OK, "This is an API server, please use the correct client.")
 }
 
-async fn barcode_scan(
+async fn barcode_lookup(
     Query(payload): Query<BarcodeInput>, Extension(pool): Extension<MySqlPool>, 
 ) -> (StatusCode, Result<Json<BarcodeModel>, String>) {
 

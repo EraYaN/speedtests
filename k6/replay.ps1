@@ -1,0 +1,1 @@
+.\k6 dashboard replay --period '1s' --open $args
