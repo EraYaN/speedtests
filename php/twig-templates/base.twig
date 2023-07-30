@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+    <title>
+        {% block pagetitle %}{% endblock %}Speedtest
+    </title>
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+</head>
+<body>
+    <main id="main-content" role="main" data-route-name="{{ current_route_name }}">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

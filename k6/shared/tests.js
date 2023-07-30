@@ -35,6 +35,23 @@ export function barcodeLookup(url) {
   };
 }
 
+export function barcodeTemplate(url) {
+  return function () {
+    tagWithCurrentStageIndex();
+    let barcode = "";
+    if (randomIntBetween(0, 100) < 5) {
+      // generate 404
+      barcode = randomString(8);
+    } else {
+      // generate 200
+      barcode = randomItem(codes);
+    }
+    const res = http.get(`${url}/barcode/template?barcode=${barcode}`, {
+      tags: { name: "Template" },
+    });
+  };
+}
+
 export function makeHandleSummary(name) {
   return function (data) {
     let fileName = `data/${name}-summary.json`;

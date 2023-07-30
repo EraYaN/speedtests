@@ -29,5 +29,16 @@ They should all have a MySQL Connection Pool of 100 in total, except for PHP whi
 | Go 1.20 Fiber                      |     2,611 |    183.9 |     20.1 |      345.8 |    1,214.2 | Long before the limit is reached, at around 1700 req/s, latency starts spiking and throughput becomes spiky. Quits on latency. |
 | Rust 1.69 Axum                     |     5,025 |    107.2 |     18.0 |       65.6 |      675.3 |                                                                                                                                |
 
+![](graphs/requests-bare-api.svg?raw=true)
 
-![](graphs/requests.svg?raw=true)
+After adding the templating engine (still lookup endpoint)
+
+| Implementation                          | Rate (/s) | Avg (ms) | Med (ms) | p(90) (ms) | p(95) (ms) | Notes                                                                    |
+| --------------------------------------- | --------: | -------: | -------: | ---------: | ---------: | ------------------------------------------------------------------------ |
+| PHP-FPM 8.2 Slim Framework Twig FastCGI |       198 |    197.0 |     39.3 |      745.1 |    1,145.6 | Pegs the CPU, but keeps working, quits on the latency bound. (5 workers) |
+
+And the template endpoint itself:
+
+| Implementation                          | Rate (/s) | Avg (ms) | Med (ms) | p(90) (ms) | p(95) (ms) | Notes                                                                    |
+| --------------------------------------- | --------: | -------: | -------: | ---------: | ---------: | ------------------------------------------------------------------------ |
+| PHP-FPM 8.2 Slim Framework Twig FastCGI |       171 |  197.0 |    41.9 |  761.1 | 1,159.3 | Pegs the CPU, but keeps working, quits on the latency bound. (5 workers) |

@@ -1,0 +1,17 @@
+{% extends 'base.twig' %}
+
+{% block pagetitle %}
+Not Found - 
+{% endblock %}
+
+{% block content %}
+    <h1>{% trans %}Page was not found{% endtrans %}</h1>
+    <p>
+        {% trans %}The page you were trying to access was not found.{% endtrans %}
+    </p>
+    <p>
+        <small>Method: {{method}} Host: <strong>{{host|default('n/a')}}</strong> Path: <strong>{{path|default('n/a')}}</strong> Query: <strong>{{query|default('n/a')}}</strong> Route: <strong>{{ routeName | default('n/a') }}</strong></small>
+    </p>
+
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.twig' %}
+
+
+{% block pagetitle %}
+    Barcode -
+{% endblock %}
+
+{% block content %}
+<p><strong>Id:</strong> {{ barcode.id }}</p>
+<p><strong>Code:</strong> {{ barcode.code }}</p>
+<p><strong>Status:</strong> {{ barcode.status }}</p>
+{% endblock %}
