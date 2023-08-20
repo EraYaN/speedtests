@@ -1,0 +1,26 @@
+﻿@page "/barcode/template"
+@model dotnetspeedtest.Pages.BarcodeModel
+@{
+    @if (@Model.HasBarcode)
+    {
+        ViewData["Title"] = "Barcode - ";
+    } else {
+        ViewData["Title"] = "Not Found - ";
+    }
+}
+
+@if (@Model.HasBarcode)
+{
+    <p><strong>Id:</strong> @Model.Barcode.Id</p>
+    <p><strong>Code:</strong> @Model.Barcode.Code</p>
+    <p><strong>Status:</strong> @Model.Barcode.Status</p>
+} else
+{
+    <h1>Page was not found</h1>
+    <p>
+        The page you were trying to access was not found.
+    </p>
+    <p>
+        Error @(Model.RawBarcode): no such barcode
+    </p>
+}

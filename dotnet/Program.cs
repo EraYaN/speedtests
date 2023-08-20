@@ -1,3 +1,5 @@
+using System.Net.Mime;
+using System.Text;
 using System.Text.Json.Serialization;
 
 using Dapper;
@@ -12,7 +14,7 @@ using MySql.Data.MySqlClient;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddRazorPages();
 builder.Services.Configure<JsonOptions>(o => o.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 //builder.Services.Configure<MvcJsonOptions>(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
@@ -31,6 +33,8 @@ var app = builder.Build();
 //    app.UseSwagger();
 //    app.UseSwaggerUI();
 //}
+
+app.MapRazorPages();
 
 app.MapGet("/", () => Results.Ok("This is an API server, please use the correct client."));
 
@@ -53,5 +57,6 @@ app.MapGet("/barcode/lookup", (string barcode, MySqlConnection conn) => {
         _ => Results.NotFound()
     };
 });
+
 
 app.Run();
