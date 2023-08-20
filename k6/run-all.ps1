@@ -1,12 +1,16 @@
-# .\k6 run -o 'dashboard=period=1s' --out 'csv=data/rust.csv' --out 'json=data/rust.json' rust.js
-# .\k6 run -o 'dashboard=period=1s' --out 'csv=data/dotnet.csv' --out 'json=data/dotnet.json' dotnet.js
-# .\k6 run -o 'dashboard=period=1s' --out 'csv=data/go.csv' --out 'json=data/go.json' go.js
-# .\k6 run -o 'dashboard=period=1s' --out 'csv=data/python.csv' --out 'json=data/python.json' python.js
-# .\k6 run -o 'dashboard=period=1s' --out 'csv=data/php.csv' --out 'json=data/php.json' php.js
+k6 run --out 'csv=data/php-lookup.csv' --env LANG=php --env ENDPOINT=lookup remote.js
+k6 run --out 'csv=data/php-template.csv' --env LANG=php --env ENDPOINT=template remote.js
 
-k6 run --out 'csv=data/php.csv' --env LANG=php remote.js
-k6 run --out 'csv=data/python.csv' --env LANG=python remote.js
-k6 run --out 'csv=data/dotnet.csv' --env LANG=dotnet remote.js
-k6 run --out 'csv=data/go.csv' --env LANG=go remote.js
-k6 run --out 'csv=data/go-fiber.csv' --env LANG=go-fiber remote.js
-k6 run --out 'csv=data/rust.csv' --env LANG=rust remote.js
+k6 run --out 'csv=data/python-lookup.csv' --env LANG=python --env ENDPOINT=lookup remote.js
+k6 run --out 'csv=data/python-template.csv' --env LANG=python --env ENDPOINT=template remote.js
+
+k6 run --out 'csv=data/dotnet-lookup.csv' --env LANG=dotnet --env ENDPOINT=lookup remote.js
+k6 run --out 'csv=data/dotnet-template.csv' --env LANG=dotnet --env ENDPOINT=template remote.js
+
+k6 run --out 'csv=data/go-lookup.csv' --env LANG=go --env ENDPOINT=lookup remote.js
+k6 run --out 'csv=data/go-template.csv' --env LANG=go --env ENDPOINT=template remote.js
+
+k6 run --out 'csv=data/go-fiber-lookup.csv' --env LANG=go-fiber --env ENDPOINT=lookup remote.js
+
+k6 run --out 'csv=data/rust-lookup.csv' --env LANG=rust --env ENDPOINT=lookup remote.js
+k6 run --out 'csv=data/rust-template.csv' --env LANG=rust --env ENDPOINT=template remote.js
