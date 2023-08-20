@@ -10,6 +10,8 @@ import (
 	"github.com/gin-gonic/gin"
 
 	_ "github.com/go-sql-driver/mysql"
+
+	"github.com/CloudyKit/jet/v6"
 )
 
 type barcodeType string
@@ -27,6 +29,11 @@ const (
 	used       barcodeType = "used"
 	returned   barcodeType = "returned"
 	expired    barcodeType = "expired"
+)
+
+var views = jet.NewSet(
+	jet.NewOSFileSystemLoader("./views"),
+	//jet.InDevelopmentMode(), // remove in production
 )
 
 func barcodeFromCode(code string) (barcode, error) {
@@ -58,6 +65,47 @@ func getBarcode(c *gin.Context) {
 	c.JSON(http.StatusOK, bc)
 }
 
+func makeNotFoundTemplate(c *gin.Context, orig_err error) {
+	vars := make(jet.VarMap)
+	t, err := views.GetTemplate("not-found.jet")
+	if err != nil {
+		// template could not be loaded, log the error?
+		c.AbortWithError(http.StatusInternalServerError, err)
+	}
+	vars.Set("err", orig_err)
+	if err = t.Execute(c.Writer, vars, nil); err != nil {
+		// log the error
+		c.AbortWithError(http.StatusInternalServerError, err)
+	}
+}
+
+// getBarcode responds with the scanned barcode.
+func getBarcodeTemplate(c *gin.Context) {
+
+	barcode := c.DefaultQuery("barcode", "")
+	if barcode == "" {
+		makeNotFoundTemplate(c, nil)
+		return
+	}
+	bc, err := barcodeFromCode(barcode)
+	if err != nil {
+		makeNotFoundTemplate(c, err)
+		return
+	}
+	vars := make(jet.VarMap)
+	vars.Set("barcode", bc)
+	t, err := views.GetTemplate("barcode.jet")
+	if err != nil {
+		// template could not be loaded, log the error?
+		makeNotFoundTemplate(c, err)
+	}
+	//c.Writer.WriteHeader(http.StatusOK)
+	if err = t.Execute(c.Writer, vars, nil); err != nil {
+		// log the error
+		makeNotFoundTemplate(c, err)
+	}
+}
+
 func root(c *gin.Context) {
 	c.String(200, "This is an API server, please use the correct client.")
 }
@@ -84,6 +132,7 @@ func main() {
 	router.Use(gin.Recovery())
 	router.GET("/", root)
 	router.GET("/barcode/lookup", getBarcode)
+	router.GET("/barcode/template", getBarcodeTemplate)
 
 	router.Run("0.0.0.0:8080")
 }

@@ -1,0 +1,16 @@
+{{extends "base.jet"}}
+
+{{block pageTitle()}}
+Not Found - 
+{{end}}
+
+{{block documentBody()}}
+  <h1>Page was not found</h1>
+<p>
+    The page you were trying to access was not found.
+</p>
+<p>
+    Error {{err}}
+</p>
+
+{{end}}

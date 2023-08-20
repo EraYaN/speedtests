@@ -18,6 +18,7 @@ FROM gcr.io/distroless/base-debian11 AS build-release-stage
 WORKDIR /
 
 COPY --from=build-stage /go-speedtest /go-speedtest
+COPY ./views /views
 
 EXPOSE 8080
 

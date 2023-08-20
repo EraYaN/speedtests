@@ -1,0 +1,11 @@
+{{extends "base.jet"}}
+
+{{block pageTitle()}}
+Barcode - 
+{{end}}
+
+{{block documentBody()}}
+    <p><strong>Id:</strong> {{ barcode.Id }}</p>
+    <p><strong>Code:</strong> {{ barcode.Code }}</p>
+    <p><strong>Status:</strong> {{ barcode.Status }}</p>
+{{end}}
