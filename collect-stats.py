@@ -4,7 +4,10 @@ import os.path
 
 import matplotlib.pyplot as plt
 
-endpoints = ["lookup", "template"]
+endpoints = [
+    "lookup", 
+    "template"
+    ]
 
 languages = [
     "php",
